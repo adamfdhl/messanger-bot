@@ -15,6 +15,7 @@ app.set("port", process.env.PORT || 5000);
 let token = process.env.ACCESS_TOKEN;
 
 let state = 0;
+let userData = {};
 
 app.get("/", (req, res) => {
 	res.send("CHATBOT LIVE");
@@ -39,15 +40,17 @@ app.post("/webhook/", (req, res) => {
 			let text = event.message.text;
 			if (state === 0) {
 				sendText(sender, "Hi, I'm your birthday bot! What is your first name?");
+				userData.name = event.message.text;
 			} else if (state === 1) {
 				sendText(
 					sender,
-					"Hello! Nice to meet you! When is your birthdate? Please type in <YYYY-MM-DD>."
+					`Hello ${userData.name}! Nice to meet you! When is your birthdate? Please type in <YYYY-MM-DD>.`
 				);
+				userData.birthdate = event.message.text;
 			} else if (state === 2) {
 				sendText(
 					sender,
-					"Do you want to know how many days until your next birthday?"
+					`${userData.name}, do you want to know how many days until your next birthday?`
 				);
 			} else if (state === 3) {
 				sendText(sender, "Your next birthday is in X days");
