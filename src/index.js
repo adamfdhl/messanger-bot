@@ -3,14 +3,12 @@ const bodyParser = require("body-parser");
 const request = require("request");
 
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.set("port", process.env.PORT || 5000);
 
 let token =
 	"EAAmZAqh8pU3oBAPxF3sHZANc8bm3Q9lr3bDJgAXT8SnL1IqVP9ptWP6mdDZA598OJKKggc3wFKBcQQEruYeRadThaiFzFCbnzFem1dqZBf9dkj5gLFopjhiBAAtyZBCu2NFMlxMWCikLyxRzYabqXCLIZCPlcUwZCDlVROVokXhRQZDZD";
-
-app.set("port", process.env.PORT || 5000);
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
 	res.send("Hi I'm a chatbot");
