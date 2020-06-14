@@ -1,14 +1,20 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
+const userRouter = require("./routes/user");
+const messageRouter = require("./routes/message");
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(userRouter);
+app.use(messageRouter);
 app.set("port", process.env.PORT || 5000);
 
-let token =
-	"EAAmZAqh8pU3oBAPxF3sHZANc8bm3Q9lr3bDJgAXT8SnL1IqVP9ptWP6mdDZA598OJKKggc3wFKBcQQEruYeRadThaiFzFCbnzFem1dqZBf9dkj5gLFopjhiBAAtyZBCu2NFMlxMWCikLyxRzYabqXCLIZCPlcUwZCDlVROVokXhRQZDZD";
+// let token =
+// 	"EAAmZAqh8pU3oBAPxF3sHZANc8bm3Q9lr3bDJgAXT8SnL1IqVP9ptWP6mdDZA598OJKKggc3wFKBcQQEruYeRadThaiFzFCbnzFem1dqZBf9dkj5gLFopjhiBAAtyZBCu2NFMlxMWCikLyxRzYabqXCLIZCPlcUwZCDlVROVokXhRQZDZD";
+
+let token = process.env.ACCESS_TOKEN;
 
 app.get("/", (req, res) => {
 	res.send("Hi I'm a chatbot");
