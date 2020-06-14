@@ -4,6 +4,9 @@ const request = require("request");
 
 const app = express();
 
+let token =
+	"EAAmZAqh8pU3oBAPxF3sHZANc8bm3Q9lr3bDJgAXT8SnL1IqVP9ptWP6mdDZA598OJKKggc3wFKBcQQEruYeRadThaiFzFCbnzFem1dqZBf9dkj5gLFopjhiBAAtyZBCu2NFMlxMWCikLyxRzYabqXCLIZCPlcUwZCDlVROVokXhRQZDZD";
+
 app.set("port", process.env.PORT || 5000);
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -41,7 +44,7 @@ const sendText = (sender, text) => {
 	request(
 		{
 			url: "https://graph.facebook.com/v7.0/me/message",
-			qs: { access_token: process.env.ACCESS_TOKEN },
+			qs: { access_token: token },
 			method: "POST",
 			json: {
 				receipt: { id: sender },
