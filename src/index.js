@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const request = require("request");
 const userRouter = require("./routes/user");
 const messageRouter = require("./routes/message");
+require("./db/mongoose");
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -14,7 +15,7 @@ app.set("port", process.env.PORT || 5000);
 let token = process.env.ACCESS_TOKEN;
 
 app.get("/", (req, res) => {
-	res.send("Hi I'm a chatbot");
+	res.send("CHATBOT LIVE");
 });
 
 // Facebook
@@ -63,5 +64,5 @@ const sendText = (sender, text) => {
 };
 
 app.listen(app.get("port"), () => {
-	console.log(`Server running`);
+	console.log(`Server is running`);
 });
